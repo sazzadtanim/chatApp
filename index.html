@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <title>Socket.IO chat</title>
+</head>
+<body>
+      <input  id="u" placeholder="Enter username">
+      <input  id="m" placeholder="Enter something..">
+      <button id="button" type="button" >send</button>
+      <div id="list" style="overflow:scroll; height:400px;"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+        var socket = io();
+        // client theke server a message send/emit korbo
+        // socket.emit('client2server', message); // ei message ta ki ? example:"sazzadtanim: hello."
+        // ei karone usename r userMessage variable import korbo;
+        // button click korle eita message ta jate server a jay, er age na;
+        // taile button import korbo
+        var button = document.getElementById('button');
+        //button e click korle kaj hhobe tai onclick function likhbo
+        button.addEventListener('click', function(){
+          // clcik korle ki hobe?
+          // click korle message ta server a send korbo
+          // message ta ready korte hobe na ?
+          var username = document.getElementById('u').value;
+          var userMessage = document.getElementById('m').value;
+          var message = username+': '+userMessage;
+          // message server a send korbo
+          socket.emit('client2server', message);
+          //kam sesh
+        });
+        // next ???????????
+        // server theke je message asbe ta recieve korte hobe
+        socket.on('server2client', function(message){
+          // console.log(message);
+          // great, message recieve korci, eibar ??
+          // message ta client a add korte hobe, kemne?
+          //message tare ekta textnode a nilam
+          var textNode  = document.createTextNode(message);
+          // textNode tare li a add korum tai age li elem banamu
+          var li = document.createElement('li');
+          // ekhon li te add korum
+          li.appendChild(textNode);
+          // ei li elem re ul elem a add korum
+          document.getElementById('list').appendChild(li);
+          // perfectoooooooooooooooooooooooooooooooooooooooooo..
+        });
+
+
+</script>
+</body>
+</html>
