@@ -27,12 +27,12 @@
           var userMessage = document.getElementById('m').value;
           var message = username+': '+userMessage;
           // message server a send korbo
-          socket.emit('client2server', message);
+          socket.emit('clientMessage', message);
           //kam sesh
         });
         // next ???????????
         // server theke je message asbe ta recieve korte hobe
-        socket.on('server2client', function(message){
+        socket.on('serverMessage', function(message){
           // console.log(message);
           // great, message recieve korci, eibar ??
           // message ta client a add korte hobe, kemne?

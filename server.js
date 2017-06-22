@@ -25,9 +25,9 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   // console.log('socket connection on hoise');
   // client theke send kora data recieve/on korbo kemne ?
-  socket.on('client2server', function(message){
+  socket.on('clientMessage', function(message){
     // server theke client a data send/emit korbo kemne?
-    io.emit('server2client', message);
+    io.emit('serverMessage', message);
   });
   // new user connection notify
   socket.broadcast.emit('server2client', 'an user is connected');
