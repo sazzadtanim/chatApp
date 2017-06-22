@@ -22,7 +22,9 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  // client theke send kora data recieve/on korbo kemne ?
+      // new user connection notify
+      socket.broadcast.emit('serverMessage', 'an user is connected');
+      // client theke send kora data recieve/on korbo kemne ?
       socket.on('clientMessage', function(message){
             // server theke client a data send/emit korbo kemne?
             io.emit('serverMessage', message);
@@ -32,7 +34,6 @@ io.on('connection', function(socket){
       socket.on('disconnect', function(message){
             socket.broadcast.emit('serverMessage', 'user disconnected');
       });
-      // new user connection notify
-      socket.broadcast.emit('serverMessage', 'an user is connected');
+
 
 });
