@@ -21,14 +21,18 @@ app.get('/', function(req, res){
     // console.log('OK, index.html has sent');
 });
 
-// server-> client-> server -> client
 io.on('connection', function(socket){
-  // console.log('socket connection on hoise');
   // client theke send kora data recieve/on korbo kemne ?
-  socket.on('clientMessage', function(message){
-    // server theke client a data send/emit korbo kemne?
-    io.emit('serverMessage', message);
-  });
-  // new user connection notify
-  socket.broadcast.emit('server2client', 'an user is connected');
+      socket.on('clientMessage', function(message){
+            // server theke client a data send/emit korbo kemne?
+            io.emit('serverMessage', message);
+      });
+      // user disconnect hole sobaike ta janano
+      //'disconnect' event ta built in
+      socket.on('disconnect', function(message){
+            socket.broadcast.emit('serverMessage', 'user disconnected');
+      });
+      // new user connection notify
+      socket.broadcast.emit('serverMessage', 'an user is connected');
+
 });
